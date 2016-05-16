@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Car RACER</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jQuery.js"></script>
+
+</head>
+<body>
+
+<script>
+
+    $(document).ready(function(){
+
+        var pageWidth, carWidth, raceTrack, car1Time, car2Time, isComplete, place;
+        
+
+        pageWidth = $(window).width();
+        carWidth = $('.car').width();
+        raceTrack = pageWidth - carWidth;
+
+
+
+        $('#start').click(function(){
+
+            car1Time = Math.floor((Math.random() * (5000-2000+1)) + 2000);
+            car2Time = Math.floor((Math.random() * (5000-2000+1)) + 2000);
+
+
+            function CheckifComplete(){
+                if(isComplete == false){
+                    isComplete = true;
+                }else{
+                    place = 'second';
+                }
+            }
+
+
+            isComplete = false;
+            place = 'first';
+
+        $('#car1').animate({
+
+            left: raceTrack-15
+
+
+        }, car1Time, function(){
+
+            CheckifComplete();
+            $('#res1').text('Finished ' + place + ' place in ' + car1Time + ' milliseconds.');
+
+            });
+
+
+        $('#car2').animate({
+
+
+            left: raceTrack-15
+
+
+        }, car2Time, function(){
+            CheckifComplete();
+            $('#res2').text('Finished ' + place + ' place in ' + car2Time + ' milliseconds.');
+
+        });
+        });
+
+
+        $('#end').click(function(){
+            $('#car1,#car2').css(
+               'left', '0'
+            );
+
+            $('#res1,#res2').text('');
+
+        });
+
+    });
+
+
+</script>
+
+
+        <div class="container">
+            <h1>jQuery CAR RACE</h1>
+
+
+    <div id="buttons">
+        <button class="btn" type="button" id="start">START</button>
+        <button class="btn" type="button" id="end">RESET</button>
+    </div>
+
+            <div id="track">
+                    <div class="carTrack">
+                        <img src="images/Car.png" alt="" class="car" id="car1">
+                    </div>
+
+                    <div class="carTrack">
+                        <img src="images/Car.png" alt="" class="car" id="car2">
+                    </div>
+            </div>
+        </div>
+
+
+            <div id="results">
+            <h3>RESULTS</h3>
+
+                    <div class="carResults" >
+                        <h3>CAR 1</h3>
+                        <h4 id="res1"></h4>
+                    </div>
+
+                    <div class="carResults" >
+                        <h3>CAR 2</h3>
+                        <h4 id="res2"></h4>
+                    </div>
+
+
+            </div>
+
+
+
+
+</body>
+</html>
